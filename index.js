@@ -6,9 +6,10 @@ require('dotenv').config();
 
 const app = express();
 
+const port = process.env.PORT || 3001;
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.ORIGIN_URL,
     credentials: true
 }));
 
@@ -28,17 +29,17 @@ app.post('/exchangerate/:from/:to', async (req, res) => {
         dataEntries.map(dataEntry => {
             return dataEntry[0] === to
                 ?  exchangeRate = dataEntry[1]
-                : null;
+                : null
         });
 
         res.status(200).json(exchangeRate);
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 
 
-app.listen(3001, () => {
-    console.log('server up on port 3001')
+app.listen(port, () => {
+    console.log(`Sever up on port ${port}`);
 });
