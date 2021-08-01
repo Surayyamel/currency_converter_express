@@ -8,14 +8,13 @@ const app = express();
 
 const port = process.env.PORT || 3001;
 
-app.set('trust proxy', 1);
-
 app.use(cors({
     origin: process.env.ORIGIN_URL,
-    credentials: true
+    credentials: true,
+    methods: 'GET',
 }));
 
-app.post('/exchangerate/:from/:to', async (req, res) => {
+app.get('/exchangerate/:from/:to', async (req, res) => {
     try {
         const { from } = req.params;
         const { to } = req.params;
