@@ -8,13 +8,13 @@ const app = express();
 
 const port = process.env.PORT || 3001;
 
-app.use(cors({
+const corsOptions = {
     origin: process.env.ORIGIN_URL,
     credentials: true,
-    methods: 'GET',
-}));
+    methods: 'GET'
+}
 
-app.get('/exchangerate/:from/:to', async (req, res) => {
+app.get('/exchangerate/:from/:to', cors(corsOptions), async (req, res) => {
     try {
         const { from } = req.params;
         const { to } = req.params;
